@@ -162,17 +162,17 @@ function App() {
       setIsEdit(true);
     };
 
-    const handleAdd = ({task}) => {
+    const handleAdd = (task) => {
       setTasks(
         [
           ...tasks,
-          {task}
+          task
         ]
       )
       return (
         <Snackbar open={true} autoHideDuration={6000}>
           <Alert
-            
+             
             severity="success"
             variant="filled"
             sx={{ width: '100%' }}
