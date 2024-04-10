@@ -43,6 +43,9 @@ import { useState } from 'react';
 import * as React from 'react';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import CancelIcon from '@mui/icons-material/Cancel';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 
 
 function FormDialog({open, handleClose, isEdit, handleAdd}) {
@@ -201,6 +204,11 @@ function App() {
   }
   
   function TaskTable() {
+    const checkedRow = {};
+    tasks.forEach(task => {
+      checkedRow[task.title] = false;
+    });
+    const [checked, setChecked] = React.useState(checkedRow);
     return (
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -226,14 +234,25 @@ function App() {
                 <TableCell align="center">{row.priority}</TableCell>
                 <TableCell align="center">
                   {<Checkbox
-                    onClick={() => {
-                      row.isComplete = !row.isComplete
+                    onChange={(event, isRowChecked) => {
+                      let tempChecked = {...checked};
+                      tempChecked[row.title] = isRowChecked;
+                      setChecked(tempChecked);
                     }}
                   />}
                 </TableCell>
                 <TableCell align="center">
                   {
-                    row.isComplete ? "yes" : "no"
+                    checked[row.title] 
+                      ? <Button>DELETE</Button>
+                      : <Stack> 
+                          <Button variant="contained">
+                            <FontAwesomeIcon icon={faPenToSquare} />UPDATE
+                          </Button>
+                          <Button variant="contained" color="error">
+                            <CancelIcon />DELETE
+                          </Button>
+                        </Stack>
                   }
                 </TableCell>
               </TableRow>
