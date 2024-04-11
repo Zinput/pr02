@@ -223,7 +223,7 @@ function FormDialog({open, handleClose, isEdit, handleAdd, taskToEdit, handleEdi
         }
         <DialogActions>
           {isEdit
-          ? <Button variant="contained" type="submit" disabled={titleError || descError || !titleModified || !descModified}><FontAwesomeIcon icon={ faPenToSquare } />EDIT</Button>
+          ? <Button variant="contained" type="submit" disabled={descError}><FontAwesomeIcon icon={ faPenToSquare } />EDIT</Button>
           : <Button variant="contained" type="submit" disabled={titleError || descError || !titleModified || !descModified}><AddCircleIcon />ADD</Button>
           }
           <Button variant="contained" color="error" onClick={handleClose}><BlockIcon /> CANCEL</Button>
